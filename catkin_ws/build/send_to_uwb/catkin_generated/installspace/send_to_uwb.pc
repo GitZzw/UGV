@@ -1,0 +1,8 @@
+prefix=/home/gg/zzw/UGV/catkin_ws/install
+
+Name: send_to_uwb
+Description: Description of send_to_uwb
+Version: 2.1.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

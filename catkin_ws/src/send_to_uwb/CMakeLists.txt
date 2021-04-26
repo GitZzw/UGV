@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   sensor_msgs
+  nlink_parser
 )
 # find_package(Boost REQUIRED COMPONENTS system)
 set(OpenCV_DIR "/usr/local/share/OpenCV/")

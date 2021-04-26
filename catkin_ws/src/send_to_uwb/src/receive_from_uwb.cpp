@@ -1,7 +1,7 @@
 #include <ros/ros.h>
 #include <string>
 #include <std_msgs/String.h>
-#include </home/mm/zzw/catkin_workspace/devel/include/nlink_parser/LinktrackNodeframe0.h>
+#include <nlink_parser/LinktrackNodeframe0.h>
 #include <sensor_msgs/Imu.h>
 
 namespace UWB_messages{

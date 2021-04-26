@@ -1,6 +1,3 @@
-
-
-
 ubuntu 开机启动图像界面和命令行界面:
 https://blog.csdn.net/londa/article/details/90905575
 

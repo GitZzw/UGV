@@ -1,0 +1,2 @@
+ftservo_control:ground_to_-uav:nlink_parser:offb_posctl:send_to_uwb:serial:viconros
+-DCATKIN_DEVEL_PREFIX=/home/gg/zzw/UGV/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/gg/zzw/UGV/catkin_ws/install -G Unix Makefiles

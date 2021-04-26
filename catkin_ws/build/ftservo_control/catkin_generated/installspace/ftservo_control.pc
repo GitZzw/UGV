@@ -1,0 +1,8 @@
+prefix=/home/gg/zzw/UGV/catkin_ws/install
+
+Name: ftservo_control
+Description: Description of ftservo_control
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
