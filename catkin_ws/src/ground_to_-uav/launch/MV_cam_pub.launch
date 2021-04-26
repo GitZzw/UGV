@@ -1,0 +1,55 @@
+<launch>
+        <!--mavros-->
+	<arg name="fcu_url" default="udp://:14550@192.168.4.1:14557" />
+	<arg name="gcs_url" default="" />
+	<arg name="tgt_system" default="1" />
+	<arg name="tgt_component" default="1" />
+	<arg name="log_output" default="screen" />
+	<arg name="fcu_protocol" default="v2.0" />
+	<arg name="respawn_mavros" default="false" />
+	<include file="$(find mavros)/launch/node.launch">
+		<arg name="pluginlists_yaml" value="$(find mavros)/launch/px4_pluginlists.yaml" />
+		<arg name="config_yaml" value="$(find mavros)/launch/px4_config.yaml" />
+
+		<arg name="fcu_url" value="$(arg fcu_url)" />
+		<arg name="gcs_url" value="$(arg gcs_url)" />
+		<arg name="tgt_system" value="$(arg tgt_system)" />
+		<arg name="tgt_component" value="$(arg tgt_component)" />
+		<arg name="log_output" value="$(arg log_output)" />
+		<arg name="fcu_protocol" value="$(arg fcu_protocol)" />
+		<arg name="respawn_mavros" default="$(arg respawn_mavros)" />
+	</include>
+        <!--camera-->
+		<node name="MV_cam_pub" pkg="ground_to_UAV" type="MV_cam_pub" output="screen">
+		</node>
+        <!--uwb-->
+    	<node pkg="nlink_parser" type="linktrack" name="linktrack0" output="screen">
+        <param name="port_name" value="/dev/ttyUSB1"/>
+        <param name="baud_rate" value="921600"/>
+    </node> 
+        <!--vicon-->
+        <node name="viconros" pkg="viconros" type="viconros" output="log">
+		<param name="host" value="192.168.2.100:801"/>
+		<param name="model" value="mhe_1st"/>
+		<param name="segment" value="mhe_1st"/>
+	</node>
+		<!--servo-->
+		<param name="initial_good_position" value="true"/>    
+		<rosparam param="world_to_base_position" >[0.0, 0.0, 0.0]</rosparam>
+		<rosparam param="world_to_base_orientation" >[0.0, 0.0, 0.0, 1.0]</rosparam>
+    	<node pkg="ground_to_UAV" type="Initial_uwb_message" name="Initial_uwb_message" output="screen">
+    </node>    
+		<!--servo_control-->
+    	<node pkg="ground_to_UAV" type="servo_control" name="servo_control" output="screen">
+    </node>
+		<!--servo_serial-->
+		<arg name="servo_serial_port" default="/dev/ttyUSB0"/>
+		<param name="servo_pub_rate" value="100"/>
+		<node pkg="ftservo_control" type="servo_read_write" name="servo_read_write" args="$(arg servo_serial_port)" output="screen">
+    </node>
+		<node pkg="rosbag" type="record" name="rosbag_mhe_msgs" args="record /camera_detect2 /UWB_local_message /MVcam/image /mavros/imu/data /mocap/pose /mocap/vel /mhe_vel /mhe_pos /nlink_linktrack_nodeframe3 /servo/position /servo/velocity /servo/position_setpoint /mhe_servo_vel /mhe_servo_pos /camera_servo_detect -o /home/mm/zzw/ " output="screen"> 
+	</node>
+
+
+
+</launch>

@@ -1,0 +1,32 @@
+<launch>
+    <node name="MV_cam_pub" pkg="ground_to_UAV" type="MV_cam_pub" output="screen">
+    </node>
+
+    <!-- <node pkg="rosbag" type="play" name="play_test" args="-l -bags /home/mm/zzw/test1.bag">
+    </node> -->
+
+
+    <param name="initial_good_position" value="true"/>    
+    <rosparam param="world_to_base_position" >[0.1, 0.1, 0.1]</rosparam>
+    <rosparam param="world_to_base_orientation" >[0.0, 0.0, 0.0, 1.0]</rosparam>
+
+    <node pkg="ground_to_UAV" type="Initial_uwb_message" name="Initial_uwb_message" output="screen">
+    </node>    
+
+    <!--servo_control-->
+    <node pkg="ground_to_UAV" type="servo_control" name="servo_control" output="screen">
+    </node>
+
+    <arg name="servo_serial_port" default="/dev/ttyUSB0"/>
+    <param name="servo_pub_rate" value="300"/>
+
+    <!--servo-->
+    <node pkg="ftservo_control" type="servo_read_write" name="servo_read_write" args="$(arg servo_serial_port)" output="screen">
+    </node>
+    <!--uwb-->
+    <node pkg="nlink_parser" type="linktrack" name="linktrack0" output="screen">
+        <param name="port_name" value="/dev/ttyUSB1"/>
+        <param name="baud_rate" value="921600"/>
+    </node>    
+
+</launch>

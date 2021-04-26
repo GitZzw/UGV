@@ -1,0 +1,7 @@
+<launch>
+	<node name="viconros" pkg="viconros" type="viconros" output="screen">
+	<param name="host" value="192.168.2.100:801"/>
+	<param name="model" value="mhe_1st"/>
+	<param name="segment" value="mhe_1st"/>
+	</node>
+</launch>

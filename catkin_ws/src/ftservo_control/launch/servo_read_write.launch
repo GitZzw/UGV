@@ -1,0 +1,7 @@
+<launch>
+	<arg name="servo_serial_port" default="/dev/ttyUSB0" />
+
+    <param name="servo_pub_rate" value="100" />
+    <node pkg="ftservo_control" type="servo_read_write" name="servo_read_write" args="$(arg servo_serial_port)" output="screen"/>
+
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+
+    <node pkg="offb_posctl" type="offb_posctl" name="offb_posctl" output="screen">
+    </node>
+</launch>

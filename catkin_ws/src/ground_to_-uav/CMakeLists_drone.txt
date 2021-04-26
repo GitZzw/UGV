@@ -1,0 +1,100 @@
+cmake_minimum_required(VERSION 3.0.2)
+project(ground_to_UAV)
+
+## Compile as C++11, supported in ROS Kinetic and newer
+add_compile_options(-std=c++11)
+
+## Find catkin macros and libraries
+## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
+## is used, also find other catkin packages
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  sensor_msgs
+  cv_bridge
+  image_transport
+  nlink_parser
+)
+
+catkin_package(
+#  INCLUDE_DIRS include
+#  LIBRARIES ground_to_UAV
+#  CATKIN_DEPENDS roscpp rospy std_msgs
+#  DEPENDS system_lib
+)
+
+include_directories(
+  include
+  ${catkin_INCLUDE_DIRS}
+  # /opt/MVS/include
+)
+
+# link_directories(/opt/MVS/lib/64)
+
+# file(GLOB MV_LIB_SOURCE /opt/MVS/lib/64/*.so)
+
+add_executable(offb_node src/offb_node.cpp)
+add_dependencies(offb_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(offb_node
+  ${catkin_LIBRARIES}
+)
+
+# add_executable(MV_cam src/MV_cam.cpp)
+# add_dependencies(MV_cam ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+
+# target_link_libraries(MV_cam
+#   ${catkin_LIBRARIES}
+#   # ${MV_LIB_SOURCE}
+#   MvCameraControl
+#   ${OpenCV_LIBS}
+# )
+
+
+# add_executable(pnp_MV_cam src/pnp_MV_cam.cpp)
+# add_dependencies(pnp_MV_cam ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+# target_link_libraries(pnp_MV_cam
+#   ${catkin_LIBRARIES}
+#   MvCameraControl
+#   ${OpenCV_LIBS}
+#   # nlink_parser_gencpp
+# )
+
+# add_executable(pnp_MV_video src/pnp_MV_video.cpp)
+# add_dependencies(pnp_MV_video ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+# target_link_libraries(pnp_MV_video
+#   ${catkin_LIBRARIES}
+#   ${OpenCV_LIBS}
+# )
+
+# add_executable(MV_cam_pub src/MV_cam_pub.cpp)
+# add_dependencies(MV_cam_pub ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+# target_link_libraries(MV_cam_pub
+#   ${catkin_LIBRARIES}
+#   MvCameraControl
+#   ${OpenCV_LIBS}
+# )
+
+add_executable(UWB_message_test src/UWB_message_test.cpp)
+add_dependencies(UWB_message_test ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+target_link_libraries(UWB_message_test
+  ${catkin_LIBRARIES}
+)
+
+add_executable(pose_fusion src/pose_fusion.cpp)
+add_dependencies(pose_fusion ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+target_link_libraries(pose_fusion
+  ${catkin_LIBRARIES}
+)
+
+add_executable(kalman src/kalman.cpp)
+add_dependencies(kalman ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+target_link_libraries(kalman
+  ${catkin_LIBRARIES}
+)
+
+add_executable(kalman_calculate_cov src/kalman_calculate_cov.cpp)
+add_dependencies(kalman_calculate_cov ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS} )
+target_link_libraries(kalman_calculate_cov
+  ${catkin_LIBRARIES}
+)

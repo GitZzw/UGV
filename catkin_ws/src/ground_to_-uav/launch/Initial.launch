@@ -1,0 +1,10 @@
+<launch>
+
+    <param name="initial_good_position" value="true"/>    
+    <rosparam param="world_to_base_position" >[0.1, 0.1, 0.1]</rosparam>
+    <rosparam param="world_to_base_orientation" >[0.0, 0.0, 0.0, 1.0]</rosparam>
+
+    <node pkg="ground_to_UAV" type="Initial_uwb_message" name="Initial_uwb_message" output="screen">
+    </node>    
+
+</launch>

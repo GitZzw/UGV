@@ -1,0 +1,13 @@
+<launch>
+
+  <node pkg="rosbag" type="play" name="play1" output="screen" args="--clock /home/mm/zzw/bags/camera/camera_bag_1.bag"/>
+
+
+
+  <node pkg="rosbag" type="play" name="play2" output="screen" args="--clock /home/mm/zzw/bags/drone/drone_bag_1.bag"/>
+
+
+  <node pkg="rosbag" type="play" name="play3" output="screen" args="--clock /home/mm/zzw/bags/vicon/vicon_bag_1.bag"/>
+
+
+</launch>
