@@ -26,3 +26,7 @@ pip install Cython termcolor rospkg numpy tensorboard pycocotools matplotlib pya
 cd nanodet 
 python setup.py develop
 
+
+# Remembers
+1. 在训练的时候，增大inputsize容易爆显存，可以适当减小batchsize
+2. 在训练的时候，loss出现Nan或者0.00等结果，可以考虑降低学习率来改善
